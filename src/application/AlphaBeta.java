@@ -31,7 +31,7 @@ public class AlphaBeta {
 	// Giới hạn chiều sâu của thuật toán
 	private int maxDepth;
 
-	// Giới hạn đánh giá bước đi
+	// Giới hạn chọn bước đi
 	private int maxNode;
 
 	// Biến tạm kích thước bàn cờ
@@ -477,6 +477,10 @@ public class AlphaBeta {
 			}
 		}
 		return true;
+	}
+
+	public int[][] getEvaluteNode() {
+		return evaluteNode;
 	}
 
 }

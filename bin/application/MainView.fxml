@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<BorderPane fx:id="bpRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <right>
       <BorderPane style="-fx-background-color: #1CFAD8;" BorderPane.alignment="CENTER">
          <bottom>
@@ -168,6 +168,31 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
+                  <Separator disable="true">
+                     <padding>
+                        <Insets bottom="15.0" top="15.0" />
+                     </padding>
+                  </Separator>
+                  <JFXButton fx:id="btnDebug" onAction="#toggleDebug" style="-fx-background-color: E0C748;" text="Debug" textFill="#313131e5">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="10.0" right="10.0" top="8.0" />
+                     </padding>
+                     <ripplerFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#9d00ff" />
+                              <Stop color="#9d00ff" offset="0.007662835249042145" />
+                              <Stop color="#35dedb00" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </ripplerFill>
+                  </JFXButton>
                </children>
                <BorderPane.margin>
                   <Insets bottom="45.0" />
@@ -180,40 +205,58 @@
       </BorderPane>
    </right>
    <center>
-      <BorderPane BorderPane.alignment="CENTER">
-         <top>
-            <BorderPane style="-fx-background-color: #1CFAD8;" BorderPane.alignment="CENTER">
-               <left>
-                  <JFXButton fx:id="btnPre" onAction="#pre" text="&lt;&lt;" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-               </left>
-               <right>
-                  <JFXButton fx:id="btnNext" onAction="#next" text="&gt;&gt;" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-               </right>
+      <BorderPane fx:id="bpMain" BorderPane.alignment="CENTER">
+         <right>
+            <BorderPane BorderPane.alignment="CENTER">
+               <top>
+                  <BorderPane style="-fx-background-color: #1CFAD8;" BorderPane.alignment="CENTER">
+                     <left>
+                        <JFXButton fx:id="btnPre" onAction="#pre" text="&lt;&lt;" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </left>
+                     <right>
+                        <JFXButton fx:id="btnNext" onAction="#next" text="&gt;&gt;" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </right>
+                     <center>
+                        <Label fx:id="lbMes" text="Turn?" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                     </center>
+                  </BorderPane>
+               </top>
                <center>
-                  <Label fx:id="lbMes" text="Turn?" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Label>
+                  <Pane fx:id="mainBoard" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-         </top>
+         </right>
          <center>
-            <Pane fx:id="mainBoard" BorderPane.alignment="CENTER" />
+            <BorderPane fx:id="bpDebug" prefWidth="150.0" BorderPane.alignment="CENTER">
+               <bottom>
+                  <Label fx:id="lbDebug" alignment="CENTER" prefWidth="150.0" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </bottom>
+               <center>
+                  <ScrollPane fx:id="spDebug" hbarPolicy="NEVER" prefHeight="0.0" prefWidth="150.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
          </center>
       </BorderPane>
    </center>
