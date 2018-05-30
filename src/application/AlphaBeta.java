@@ -416,14 +416,6 @@ public class AlphaBeta {
 	// thuật toán cắt tỉa alpha-beta
 	public int alphaBeta(int a, int b, int depth, int turn) {
 
-		/*
-		 * // Người thắng if (checkWin(x, y, this.HUMAN)) { return -10000 + depth; }
-		 * 
-		 * // AI thắng if (checkWin(x, y, this.AI)) { return 10000 - depth; }
-		 * 
-		 * // huề if (checkNull()) { return 0; }
-		 */
-
 		int val = evaluateBoard(), rs;
 		if (depth >= maxDepth || Math.abs(val) > 3000) {
 			return val;

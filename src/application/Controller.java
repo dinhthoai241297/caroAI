@@ -5,10 +5,19 @@
   */
 package application;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import com.jfoenix.controls.JFXButton;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
@@ -16,6 +25,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class Controller {
 
@@ -62,10 +73,16 @@ public class Controller {
 	
 	private MyButton[][] myBtn;
 	
+	private Stage stage;
+	
 	public Controller() {
 		this.size = 20;
 		this.mb = new MainBoard(this.size);
 		search = new AlphaBeta(this.size, 3);
+	}
+	
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
 	
 	public void newBoard() {
@@ -140,11 +157,57 @@ public class Controller {
 	}
 
 	public void save() {
-		System.out.println("save");
+		FileChooser.ExtensionFilter extFilter = 
+                new FileChooser.ExtensionFilter("GAME file(*.pdt)", "*.pdt");
+		FileChooser fc = new FileChooser();
+		fc.getExtensionFilters().add(extFilter);
+		fc.setTitle("Save Game");
+		fc.setInitialFileName("gameCaro.pdt");
+		
+		File file = fc.showSaveDialog(this.stage);
+		
+		System.out.println(file);
+		String mes = "";
+		if (file != null) {
+			try {
+				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+				oos.writeObject(mb);
+				oos.close();
+				mes = "Lưu game thành công!";
+			} catch (IOException e) {
+				mes = "Lưu game thất bại!";
+				e.printStackTrace();
+			}
+		}
+		Alert alert = new Alert("Lưu game thành công!".equals(mes) ? AlertType.INFORMATION : AlertType.WARNING);
+		alert.setTitle("Thông báo!");
+		alert.setHeaderText(null);
+		alert.setContentText(mes);
+		alert.showAndWait();
 	}
 
 	public void load() {
 		System.out.println("load");
+		FileChooser.ExtensionFilter extFilter = 
+                new FileChooser.ExtensionFilter("GAME file(*.pdt)", "*.pdt");
+		FileChooser fc = new FileChooser();
+		fc.getExtensionFilters().add(extFilter);
+		fc.setTitle("Load Game");
+		
+		File file = fc.showOpenDialog(this.stage);
+		String mes = "File không hợp lệ!";
+		if (file == null || !file.exists() || file.isDirectory()) {
+			System.out.println("file not found");
+		} else {
+			try {
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+				this.mb = (MainBoard) ois.readObject();
+				ois.close();
+				updateLoadGame();
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void newGame() {
@@ -179,6 +242,20 @@ public class Controller {
 		lbMes.setText(won ? "Game Over!" : this.mb.getTurn() == 1 ? "Player 1" : "Player 2");
 		btnPre.setDisable(mb.nullPre());
 		btnNext.setDisable(mb.nullNext());
+	}
+	
+
+	private void updateLoadGame() {
+		for (int i = 0; i < this.size; i++) {
+			for (int j = 0; j < this.size; j++) {
+				if (this.mb.getBoard()[i][j] == 0) {
+					this.myBtn[i][j].resetBtn();
+				} else {
+					this.myBtn[i][j].updateClick(this.mb.getBoard()[i][j] == 1 ? MyButton.XICON : MyButton.OICON);
+				}
+			}
+		}
+		updateView(null, this.mb.isOver());
 	}
 	
 	public void toggleDebug() {

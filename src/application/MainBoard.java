@@ -5,9 +5,10 @@
   */
 package application;
 
+import java.io.Serializable;
 import java.util.Stack;
 
-public class MainBoard {
+public class MainBoard implements Serializable{
 
 	public static final int PR1 = 1;
 	public static final int PR2 = 2;
