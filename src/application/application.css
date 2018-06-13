@@ -4,8 +4,8 @@
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: cover;
 	-fx-cursor: hand;
-	-fx-pref-width: 28;
-	-fx-pref-height: 28;
+	/*-fx-pref-width: 28;
+	-fx-pref-height: 28;*/
 }
 
 .node:hover {

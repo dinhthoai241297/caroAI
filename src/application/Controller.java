@@ -178,6 +178,8 @@ public class Controller {
 				mes = "Lưu game thất bại!";
 				e.printStackTrace();
 			}
+		} else {
+			mes = "Đường dẫn không hợp lệ!";
 		}
 		Alert alert = new Alert("Lưu game thành công!".equals(mes) ? AlertType.INFORMATION : AlertType.WARNING);
 		alert.setTitle("Thông báo!");

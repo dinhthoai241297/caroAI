@@ -204,59 +204,55 @@
          </padding>
       </BorderPane>
    </right>
-   <center>
-      <BorderPane fx:id="bpMain" BorderPane.alignment="CENTER">
-         <right>
-            <BorderPane BorderPane.alignment="CENTER">
-               <top>
-                  <BorderPane style="-fx-background-color: #1CFAD8;" BorderPane.alignment="CENTER">
-                     <left>
-                        <JFXButton fx:id="btnPre" onAction="#pre" text="&lt;&lt;" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                     </left>
-                     <right>
-                        <JFXButton fx:id="btnNext" onAction="#next" text="&gt;&gt;" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                     </right>
-                     <center>
-                        <Label fx:id="lbMes" text="Turn?" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font name="System Bold Italic" size="18.0" />
-                           </font>
-                        </Label>
-                     </center>
-                  </BorderPane>
-               </top>
-               <center>
-                  <Pane fx:id="mainBoard" BorderPane.alignment="CENTER" />
-               </center>
-            </BorderPane>
-         </right>
+   <left>
+      <BorderPane fx:id="bpDebug" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <bottom>
+            <Label fx:id="lbDebug" alignment="CENTER" prefWidth="150.0" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </bottom>
          <center>
-            <BorderPane fx:id="bpDebug" prefWidth="150.0" BorderPane.alignment="CENTER">
-               <bottom>
-                  <Label fx:id="lbDebug" alignment="CENTER" prefWidth="150.0" BorderPane.alignment="CENTER">
+            <ScrollPane fx:id="spDebug" hbarPolicy="NEVER" prefHeight="0.0" prefWidth="150.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </left>
+   <center>
+      <BorderPane BorderPane.alignment="CENTER">
+         <top>
+            <BorderPane style="-fx-background-color: #1CFAD8;" BorderPane.alignment="CENTER">
+               <left>
+                  <JFXButton fx:id="btnPre" onAction="#pre" text="&lt;&lt;" BorderPane.alignment="CENTER">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </left>
+               <right>
+                  <JFXButton fx:id="btnNext" onAction="#next" text="&gt;&gt;" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </right>
+               <center>
+                  <Label fx:id="lbMes" text="Turn?" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
                      </font>
                   </Label>
-               </bottom>
-               <center>
-                  <ScrollPane fx:id="spDebug" hbarPolicy="NEVER" prefHeight="0.0" prefWidth="150.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
+         </top>
+         <center>
+            <Pane fx:id="mainBoard" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </center>
